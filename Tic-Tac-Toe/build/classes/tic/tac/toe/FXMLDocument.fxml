@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.effect.Blend?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.ColumnConstraints?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.RowConstraints?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane id="AnchorPane" stylesheets="@Style.css" prefHeight="720.0" prefWidth="1280.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="tic.tac.toe.FXMLDocumentController">
+    <children>
+      <BorderPane prefHeight="720.0" prefWidth="1280.0">
+         <center>
+            <GridPane gridLinesVisible="true" hgap="2.0" prefHeight="500.0" prefWidth="692.0" style="-fx-background-color: royalblue;" vgap="2.0" BorderPane.alignment="CENTER">
+               <columnConstraints>
+                  <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" maxWidth="286.0" minWidth="10.0" prefWidth="228.0" />
+                  <ColumnConstraints hgrow="SOMETIMES" maxWidth="234.0" minWidth="100.0" prefWidth="222.0" />
+                  <ColumnConstraints hgrow="SOMETIMES" maxWidth="238.0" minWidth="10.0" prefWidth="222.0" />
+               </columnConstraints>
+               <rowConstraints>
+                  <RowConstraints maxHeight="219.0" minHeight="10.0" prefHeight="214.0" vgrow="SOMETIMES" />
+                  <RowConstraints maxHeight="259.0" minHeight="10.0" prefHeight="230.0" vgrow="SOMETIMES" />
+                  <RowConstraints maxHeight="235.0" minHeight="10.0" prefHeight="225.0" vgrow="SOMETIMES" />
+               </rowConstraints>
+               <children>
+                  <Button id="button00" minHeight="200.0" onAction="#handleButtonAction" prefWidth="200.0" styleClass="GameGrid" />
+                  <Button id="button01" minHeight="200.0" onAction="#handleButtonAction" prefWidth="200.0" styleClass="GameGrid" GridPane.columnIndex="1" GridPane.halignment="CENTER" />
+                  <Button id="button02" minHeight="200.0" onAction="#handleButtonAction" prefWidth="200.0" styleClass="GameGrid" GridPane.columnIndex="2" GridPane.halignment="CENTER" />
+                  <Button id="button10" minHeight="200.0" onAction="#handleButtonAction" prefWidth="200.0" styleClass="GameGrid" GridPane.rowIndex="1" />
+                  <Button id="button11" minHeight="200.0" onAction="#handleButtonAction" prefWidth="200.0" styleClass="GameGrid" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="1" />
+                  <Button id="button30" minHeight="200.0" onAction="#handleButtonAction" prefWidth="200.0" styleClass="GameGrid" GridPane.rowIndex="2" />
+                  <Button id="button12" minHeight="200.0" onAction="#handleButtonAction" prefWidth="200.0" styleClass="GameGrid" GridPane.columnIndex="2" GridPane.halignment="CENTER" GridPane.rowIndex="1" />
+                  <Button id="button31" minHeight="200.0" onAction="#handleButtonAction" prefWidth="200.0" styleClass="GameGrid" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="2" />
+                  <Button id="button32" minHeight="200.0" onAction="#handleButtonAction" prefWidth="200.0" styleClass="GameGrid" GridPane.columnIndex="2" GridPane.halignment="CENTER" GridPane.rowIndex="2" />
+               </children>
+               <effect>
+                  <Blend />
+               </effect>
+            </GridPane>
+         </center>
+         <right>
+            <GridPane prefHeight="720.0" prefWidth="588.0" BorderPane.alignment="CENTER">
+              <columnConstraints>
+                <ColumnConstraints hgrow="SOMETIMES" maxWidth="283.0" minWidth="10.0" prefWidth="260.0" />
+                <ColumnConstraints hgrow="SOMETIMES" maxWidth="189.0" minWidth="10.0" prefWidth="69.0" />
+                  <ColumnConstraints hgrow="SOMETIMES" maxWidth="259.0" minWidth="10.0" prefWidth="259.0" />
+              </columnConstraints>
+              <rowConstraints>
+                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+              </rowConstraints>
+               <children>
+                  <Label id="Player1Label" text="Player1" GridPane.halignment="CENTER">
+                     <font>
+                        <Font name="System Bold" size="50.0" />
+                     </font>
+                  </Label>
+                  <Label id="Player2Label" text="Player2" GridPane.columnIndex="2" GridPane.halignment="CENTER">
+                     <font>
+                        <Font name="System Bold" size="50.0" />
+                     </font>
+                  </Label>
+                  <Label id="Counter1" text="0" GridPane.halignment="CENTER" GridPane.rowIndex="1">
+                     <font>
+                        <Font name="System Bold" size="60.0" />
+                     </font>
+                  </Label>
+                  <Label id="Counter2" text="0" GridPane.columnIndex="2" GridPane.halignment="CENTER" GridPane.rowIndex="1">
+                     <font>
+                        <Font name="System Bold" size="60.0" />
+                     </font>
+                  </Label>
+                  <Label id="Counter1" text="-" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="1">
+                     <font>
+                        <Font name="System Bold" size="70.0" />
+                     </font>
+                  </Label>
+               </children>
+            </GridPane>
+         </right>
+      </BorderPane>
+    </children>
+</AnchorPane>
