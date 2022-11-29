@@ -10,11 +10,11 @@
 <?import javafx.scene.layout.RowConstraints?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane id="AnchorPane" stylesheets="@Style.css" prefHeight="720.0" prefWidth="1280.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="tic.tac.toe.FXMLDocumentController">
+<AnchorPane id="AnchorPane" prefHeight="720.0" prefWidth="1280.0" stylesheets="@Style.css" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="tic.tac.toe.FXMLDocumentController">
     <children>
       <BorderPane prefHeight="720.0" prefWidth="1280.0">
          <center>
-            <GridPane gridLinesVisible="true" hgap="2.0" prefHeight="500.0" prefWidth="692.0" style="-fx-background-color: royalblue;" vgap="2.0" BorderPane.alignment="CENTER">
+            <GridPane gridLinesVisible="true" prefHeight="500.0" prefWidth="692.0" style="-fx-background-color: royalblue;" BorderPane.alignment="CENTER">
                <columnConstraints>
                   <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" maxWidth="286.0" minWidth="10.0" prefWidth="228.0" />
                   <ColumnConstraints hgrow="SOMETIMES" maxWidth="234.0" minWidth="100.0" prefWidth="222.0" />
@@ -26,15 +26,15 @@
                   <RowConstraints maxHeight="235.0" minHeight="10.0" prefHeight="225.0" vgrow="SOMETIMES" />
                </rowConstraints>
                <children>
-                  <Button id="button00" minHeight="200.0" onAction="#handleButtonAction" prefWidth="200.0" styleClass="GameGrid" />
-                  <Button id="button01" minHeight="200.0" onAction="#handleButtonAction" prefWidth="200.0" styleClass="GameGrid" GridPane.columnIndex="1" GridPane.halignment="CENTER" />
-                  <Button id="button02" minHeight="200.0" onAction="#handleButtonAction" prefWidth="200.0" styleClass="GameGrid" GridPane.columnIndex="2" GridPane.halignment="CENTER" />
-                  <Button id="button10" minHeight="200.0" onAction="#handleButtonAction" prefWidth="200.0" styleClass="GameGrid" GridPane.rowIndex="1" />
-                  <Button id="button11" minHeight="200.0" onAction="#handleButtonAction" prefWidth="200.0" styleClass="GameGrid" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="1" />
-                  <Button id="button30" minHeight="200.0" onAction="#handleButtonAction" prefWidth="200.0" styleClass="GameGrid" GridPane.rowIndex="2" />
-                  <Button id="button12" minHeight="200.0" onAction="#handleButtonAction" prefWidth="200.0" styleClass="GameGrid" GridPane.columnIndex="2" GridPane.halignment="CENTER" GridPane.rowIndex="1" />
-                  <Button id="button31" minHeight="200.0" onAction="#handleButtonAction" prefWidth="200.0" styleClass="GameGrid" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="2" />
-                  <Button id="button32" minHeight="200.0" onAction="#handleButtonAction" prefWidth="200.0" styleClass="GameGrid" GridPane.columnIndex="2" GridPane.halignment="CENTER" GridPane.rowIndex="2" />
+                  <Button id="button00" fx:id="button00" minHeight="202.0" prefHeight="231.0" prefWidth="235.0" styleClass="GameGrid" />
+                  <Button id="button01" fx:id="button01" minHeight="220.0" prefWidth="230.0" styleClass="GameGrid" GridPane.columnIndex="1" GridPane.halignment="CENTER" />
+                  <Button id="button02" fx:id="button02" minHeight="220.0" prefWidth="230.0" styleClass="GameGrid" GridPane.columnIndex="2" GridPane.halignment="CENTER" />
+                  <Button id="button10" fx:id="button10" minHeight="220.0" prefHeight="259.0" prefWidth="260.0" styleClass="GameGrid" GridPane.rowIndex="1" />
+                  <Button id="button11" fx:id="button11" minHeight="220.0" prefHeight="275.0" prefWidth="229.0" styleClass="GameGrid" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="1" />
+                  <Button id="button20" fx:id="button20" minHeight="220.0" prefHeight="254.0" prefWidth="235.0" styleClass="GameGrid" GridPane.rowIndex="2" />
+                  <Button id="button12" fx:id="button12" minHeight="220.0" prefHeight="277.0" prefWidth="228.0" styleClass="GameGrid" GridPane.columnIndex="2" GridPane.halignment="CENTER" GridPane.rowIndex="1" />
+                  <Button id="button21" fx:id="button21" minHeight="220.0" prefHeight="260.0" prefWidth="229.0" styleClass="GameGrid" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="2" />
+                  <Button id="button22" fx:id="button22" minHeight="220.0" prefHeight="259.0" prefWidth="228.0" styleClass="GameGrid" GridPane.columnIndex="2" GridPane.halignment="CENTER" GridPane.rowIndex="2" />
                </children>
                <effect>
                   <Blend />
@@ -44,9 +44,9 @@
          <right>
             <GridPane prefHeight="720.0" prefWidth="588.0" BorderPane.alignment="CENTER">
               <columnConstraints>
-                <ColumnConstraints hgrow="SOMETIMES" maxWidth="283.0" minWidth="10.0" prefWidth="260.0" />
-                <ColumnConstraints hgrow="SOMETIMES" maxWidth="189.0" minWidth="10.0" prefWidth="69.0" />
-                  <ColumnConstraints hgrow="SOMETIMES" maxWidth="259.0" minWidth="10.0" prefWidth="259.0" />
+                <ColumnConstraints hgrow="SOMETIMES" maxWidth="323.0" minWidth="10.0" prefWidth="281.0" />
+                <ColumnConstraints hgrow="SOMETIMES" maxWidth="189.0" minWidth="6.0" prefWidth="37.0" />
+                  <ColumnConstraints hgrow="SOMETIMES" maxWidth="270.0" minWidth="10.0" prefWidth="270.0" />
               </columnConstraints>
               <rowConstraints>
                 <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
@@ -74,11 +74,12 @@
                         <Font name="System Bold" size="60.0" />
                      </font>
                   </Label>
-                  <Label id="Counter1" text="-" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="1">
+                  <Label id="Separator" text="-" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="1">
                      <font>
                         <Font name="System Bold" size="70.0" />
                      </font>
                   </Label>
+                  <Label id="WinnerText" fx:id="WinnerText" alignment="CENTER" prefHeight="73.0" prefWidth="276.0" text="LABEL" textAlignment="CENTER" GridPane.rowIndex="2" />
                </children>
             </GridPane>
          </right>

@@ -5,11 +5,17 @@
 package tic.tac.toe;
 
 import java.net.URL;
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.ResourceBundle;
-import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+
+
 import javafx.fxml.Initializable;
+import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.scene.text.Text;
+
 
 /**
  *
@@ -18,17 +24,59 @@ import javafx.scene.control.Label;
 public class FXMLDocumentController implements Initializable {
     
     @FXML
-    private Label label;
+    private Button button00;
     
     @FXML
-    private void handleButtonAction(ActionEvent event) {
-        System.out.println("You clicked me!");
-        label.setText("Hello World!");
-    }
+    private Button button01;
+    
+    @FXML
+    private Button button02;
+    
+    @FXML
+    private Button button10;
+    
+    @FXML  
+    private Button button11;
+    
+    @FXML   
+    private Button button12;
+    
+    @FXML
+    private Button button20;
+    
+    @FXML  
+    private Button button21;
+    
+    @FXML   
+    private Button button22;
+    
+    @FXML
+    private Label WinnerText;
+    
+    ArrayList<Button> buttons;
+    
+  
     
     @Override
-    public void initialize(URL url, ResourceBundle rb) {
-        // TODO
+    public void initialize(URL url, ResourceBundle rb) 
+    {
+       buttons = new ArrayList<>(Arrays.asList(button00,button01,button02,button10,button11,button12,button20,button21,button22));
+       buttons.forEach(button ->{
+            setupButton(button);
+            button.setFocusTraversable(false);
+        });
+     WinnerText.setText("X-WON!");
+        
     }    
+    
+     @FXML
+     private void setupButton(Button button) {
+        
+        button.setOnMouseClicked(mouseEvent -> {
+            //setPlayerSymbol(button);
+             button.setText("X");
+            //checkIfGameIsOver();
+        });
+    }
     
 }
