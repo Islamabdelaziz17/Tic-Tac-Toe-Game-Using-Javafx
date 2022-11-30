@@ -11,6 +11,7 @@
 <?import javafx.scene.layout.ColumnConstraints?>
 <?import javafx.scene.layout.GridPane?>
 <?import javafx.scene.layout.RowConstraints?>
+<?import javafx.scene.shape.Line?>
 <?import javafx.scene.shape.Rectangle?>
 <?import javafx.scene.text.Font?>
 
@@ -39,6 +40,14 @@
                   <Button id="button12" fx:id="button12" alignment="CENTER" contentDisplay="CENTER" layoutX="1.0" layoutY="2.0" minHeight="220.0" prefHeight="259.0" prefWidth="249.0" styleClass="GameGrid" GridPane.columnIndex="2" GridPane.halignment="CENTER" GridPane.rowIndex="1" />
                   <Button id="button21" fx:id="button21" alignment="CENTER" contentDisplay="CENTER" layoutX="2.0" layoutY="1.0" minHeight="220.0" prefHeight="242.0" prefWidth="244.0" styleClass="GameGrid" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="2" />
                   <Button id="button22" fx:id="button22" alignment="CENTER" contentDisplay="CENTER" layoutX="2.0" layoutY="2.0" minHeight="220.0" prefHeight="269.0" prefWidth="246.0" styleClass="GameGrid" GridPane.columnIndex="2" GridPane.halignment="CENTER" GridPane.rowIndex="2" />
+                  <Line id="Hline1" fx:id="Hline1" endX="100.0" fill="BLUEVIOLET" startX="-362.5" stroke="BLUEVIOLET" strokeWidth="5.0" visible="false" GridPane.columnIndex="1" />
+                  <Line id="Hline2" fx:id="Hline2" endX="100.0" fill="BLUEVIOLET" startX="-362.5" stroke="BLUEVIOLET" strokeWidth="5.0" visible="false" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+                  <Line id="Hline3" fx:id="Hline3" endX="100.0" fill="BLUEVIOLET" startX="-362.5" stroke="BLUEVIOLET" strokeWidth="5.0" visible="false" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+                  <Line id="Vline1" fx:id="Vline1" endX="100.0" fill="BLUEVIOLET" rotate="90.0" startX="-362.5" stroke="BLUEVIOLET" strokeWidth="5.0" visible="false" GridPane.rowIndex="1" />
+                  <Line id="Vline2" fx:id="Vline2" endX="100.0" fill="BLUEVIOLET" rotate="90.0" startX="-362.5" stroke="BLUEVIOLET" strokeWidth="5.0" visible="false" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+                  <Line id="Vline3" fx:id="Vline3" endX="100.0" fill="BLUEVIOLET" rotate="90.0" startX="-362.5" stroke="BLUEVIOLET" strokeWidth="5.0" visible="false" GridPane.columnIndex="2" GridPane.rowIndex="1" />
+                  <Line id="Dline1" fx:id="Dline1" endX="100.0" fill="BLUEVIOLET" rotate="45.0" startX="-534.6494140625" startY="-18.160274505615234" stroke="BLUEVIOLET" strokeWidth="5.0" visible="false" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+                  <Line id="Dline2" fx:id="Dline2" endX="99.312744140625" endY="-29.00496482849121" fill="BLUEVIOLET" rotate="-45.0" startX="-534.6494140625" startY="-18.160274505615234" stroke="BLUEVIOLET" strokeWidth="5.0" visible="false" GridPane.columnIndex="1" GridPane.rowIndex="1" />
                </children>
                <effect>
                   <Blend />
