@@ -23,6 +23,7 @@ public class TicTacToeMain extends Application {
         Scene scene = new Scene(root);
         
         stage.setScene(scene);
+        stage.setTitle("ITI Tic-Tac-Toe Game");
         stage.show();
     }
 

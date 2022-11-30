@@ -1,14 +1,13 @@
-/*
-Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
-Click nbfs://nbhost/SystemFileSystem/Templates/Other/CascadeStyleSheet.css to edit this template
-*/
 /* 
     Created on : Nov 27, 2022, 9:51:01 AM
     Author     : islam
 */
-
+.GameGrid
+{
+    -fx-background-color:#FFE40C;
+}
 .GameGrid:hover{
     
-    -fx-background-color: #FFD700;
+    -fx-background-color: #8a2be2;
     
 }
