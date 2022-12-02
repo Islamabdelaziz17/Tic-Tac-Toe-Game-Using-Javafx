@@ -18,6 +18,7 @@ import javafx.scene.control.Label;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.GridPane;
 import javafx.scene.paint.Color;
+import static javafx.scene.paint.Color.color;
 import javafx.scene.shape.Line;
 import javafx.scene.text.Font;
 import javafx.scene.text.Text;
@@ -116,14 +117,22 @@ public class FXMLDocumentController implements Initializable {
     ArrayList<Button> buttons;
     ArrayList<Line> lines;
     
+    @FXML
+    private Label Counter1;
+     
+    @FXML
+    private Label Counter2;
     
     Alert oWon = new Alert(AlertType.CONFIRMATION);
     
+        
     
     /*Line line1,line2;
     Circle circle;*/
     
     int playerTurn = 0;
+    //int prevPos=4;
+    int x  =4;
     
     @Override
     public void initialize(URL url, ResourceBundle rb) 
@@ -132,9 +141,10 @@ public class FXMLDocumentController implements Initializable {
        buttons = new ArrayList<>(Arrays.asList(button00,button01,button02,button10,button11,button12,button20,button21,button22));
        lines = new ArrayList<>(Arrays.asList(Hline1,Hline2,Hline3,Dline1,Dline2,Vline1,Vline2,Vline3));
        
+      // setupButton();
        buttons.forEach(button ->
        {
-            setupButton(button,playerTurn);
+            setupButton(button);
             button.setFocusTraversable(false);
        });
        
@@ -225,8 +235,19 @@ public class FXMLDocumentController implements Initializable {
         //GameGrid.add(circle,(int)button.getLayoutY(),(int)button.getLayoutX());
     }*/
      @FXML
-     private void setupButton(Button button, int playerTurn) 
-     {
+     private void setupButton(Button button) 
+     {  
+         int cell;
+         
+//        cell = controlGame('D');
+//         buttonAction(cell,1);
+//         cell = controlGame('D');
+//         buttonAction(cell,1);
+//         cell = controlGame('D');
+//        buttonAction(cell,0);
+//        cell = controlGame('R');
+//         buttonAction(cell,1);
+        
         button.setOnMouseClicked(mouseEvent -> {
             setPlayerSymbol(button);
             button.setDisable(true);
@@ -290,7 +311,12 @@ public class FXMLDocumentController implements Initializable {
                     }
                 }
         }
-        public void checkIfGameIsOver(){
+            
+        
+        public void checkIfGameIsOver()
+        {
+            int player1counter = 0 ;
+            int player2counter = 0;
             int a;
             for ( a = 0; a < 8; a++) {
             String line = null;
@@ -313,7 +339,6 @@ public class FXMLDocumentController implements Initializable {
                     break;
                 case 5 : 
                     line =button00.getText() + button10.getText() + button20.getText();
-                    
                     break;
                 case 6 : 
                     line =button01.getText() + button11.getText() + button21.getText();
@@ -326,29 +351,137 @@ public class FXMLDocumentController implements Initializable {
             }
             
             //X winner
-            if (line.equals("XXX")) {
+            if (line.equals("XXX")) 
+            {
+                
                 WinnerText.setText("X won!");
-                fireAlert('X');
+                
+                player1counter++;
+                Counter1.setText(Integer.toString(player1counter));
                 lines.get(a).setVisible(true);
-                 buttons.forEach(button ->
-       {
-            button.setDisable(true);
-       });
+                buttons.forEach(button ->
+                {
+                    button.setGraphic(null);
+                    button.setDisable(false);
+                    button.setText(null);
+                    
+                });
+                lines.get(a).setVisible(false);
+                
+                if(player1counter == 3)
+                {
+                    fireAlert('X');
+                    buttons.forEach(button ->
+                    {
+                        button.setDisable(true);
+                    });
+                }
+                
              }
 
             //O winner
-            else if (line.equals("OOO")) {
+            else if (line.equals("OOO")) 
+            {
+                
                 WinnerText.setText("O won!");
-                fireAlert('O');
+                
+                player2counter++;
+                Counter2.setText(Integer.toString(player2counter));
                 lines.get(a).setVisible(true);
                 buttons.forEach(button ->
-       {
-            button.setDisable(true);
-       });
+                {
+                    button.setGraphic(null);
+                    button.setDisable(false);
+                    button.setText(null);
+                });
+                 lines.get(a).setVisible(false);
+                if(player2counter == 3)
+                {
+                    fireAlert('O');
+                    buttons.forEach(button ->
+                    {
+                         button.setDisable(true);
+                    });
+                }
             }
        }
-   }
+        }
+        
+       public int controlGame(char cellll ){
+           char input = cellll;
+           buttons.get(x).setStyle("-fx-background-color:#FFE40C");
+           if ( input  == 'U'){
+               if (x == 0 || x== 1 || x ==2 ){
+                   
+                   x+= 6;
+               }
+               else {
+                   x-= 3;
+               }
+           }
+            if ( input  == 'D'){
+               if (x == 7 || x== 8 || x ==9 ){
+                   x = x - 6;
+               }
+               else {
+                   x = x + 3;
+               }   
+           }
+            if ( input  == 'R'){
+               if (x == 2 || x== 5 || x ==8 ){
+                   x = x - 2;
+               }
+               else {
+                   x = x + 1;
+               }   
+           }
+          if ( input  == 'L'){
+               if (x == 0 || x== 3 || x ==6 ){
+                   
+                   x = x + 2;
+               }
+               else {
+                   
+                   x = x - 1;
+               }   
+           }
+          
+           
+       
      
-     
-     
+            buttons.get(x).setStyle("-fx-background-color: #8a2be2");
+            return x;
+       }
+       
+       public void buttonAction(int pos, int buttonAction){
+           
+           
+           if (buttonAction ==1 ){
+           setPlayerSymbol(buttons.get(pos));
+           buttons.get(pos).setDisable(true);
+           checkIfGameIsOver();
+           }
+       
+       
+       
+      // prevPos = pos;
+       }
+         
+       
+       
 }
+
+
+
+
+
+
+
+     
+
+
+
+
+
+
+

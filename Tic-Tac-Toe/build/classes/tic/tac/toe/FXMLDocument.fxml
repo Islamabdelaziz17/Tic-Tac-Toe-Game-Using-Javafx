@@ -68,12 +68,12 @@
               </rowConstraints>
                <children>
                   <Rectangle arcHeight="5.0" arcWidth="5.0" fill="BLUEVIOLET" height="61.0" stroke="#541654" strokeType="INSIDE" strokeWidth="5.0" width="586.0" GridPane.rowIndex="1" GridPane.valignment="CENTER" />
-                  <Label id="Counter1" prefHeight="60.0" prefWidth="35.0" text="0" textFill="WHITE" GridPane.halignment="CENTER" GridPane.rowIndex="1" GridPane.valignment="CENTER">
+                  <Label id="Counter1" fx:id="Counter1" prefHeight="60.0" prefWidth="35.0" text="0" textFill="WHITE" GridPane.halignment="CENTER" GridPane.rowIndex="1" GridPane.valignment="CENTER">
                      <font>
                         <Font name="System Bold" size="55.0" />
                      </font>
                   </Label>
-                  <Label id="Counter2" text="0" textFill="WHITE" GridPane.columnIndex="2" GridPane.halignment="CENTER" GridPane.rowIndex="1" GridPane.valignment="CENTER">
+                  <Label id="Counter2" fx:id="Counter2" text="0" textFill="WHITE" GridPane.columnIndex="2" GridPane.halignment="CENTER" GridPane.rowIndex="1" GridPane.valignment="CENTER">
                      <font>
                         <Font name="System Bold" size="55.0" />
                      </font>
