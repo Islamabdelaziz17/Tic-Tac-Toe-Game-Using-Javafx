@@ -1,13 +1,23 @@
 
 package tic.tac.toe;
-
+import Arduino.SerialControl;
 import java.net.URL;
+import java.time.Duration;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Date;
 import java.util.Optional;
 import java.util.ResourceBundle;
+import java.util.Timer;
+import java.util.TimerTask;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javafx.animation.Animation;
+import javafx.animation.KeyFrame;
+import javafx.animation.KeyValue;
+import javafx.animation.Timeline;
+import javafx.application.Platform;
 import javafx.event.ActionEvent;
-import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Alert;
@@ -15,13 +25,15 @@ import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.Button;
 import javafx.scene.control.ButtonType;
 import javafx.scene.control.Label;
-import javafx.scene.image.ImageView;
-import javafx.scene.layout.GridPane;
 import javafx.scene.paint.Color;
-import static javafx.scene.paint.Color.color;
 import javafx.scene.shape.Line;
 import javafx.scene.text.Font;
 import javafx.scene.text.Text;
+import static javafx.util.Duration.seconds;
+
+import jssc.SerialPort;
+import jssc.SerialPortEvent;
+import jssc.SerialPortException;
 
 
 /**
@@ -29,10 +41,7 @@ import javafx.scene.text.Text;
  * @author islam
  */
 public class FXMLDocumentController implements Initializable {
-    
-    @FXML
-    private GridPane GameGrid;
-    
+   
     @FXML
     private Button button00;
     
@@ -62,34 +71,7 @@ public class FXMLDocumentController implements Initializable {
     
     @FXML
     private Label WinnerText;
-    
-    @FXML
-    private ImageView Imageviewb1;
-    
-    @FXML
-    private ImageView Imageviewb2;
-    
-    @FXML
-    private ImageView Imageviewb3;
-    
-    @FXML
-    private ImageView Imageviewb4;
-    
-      @FXML
-    private ImageView Imageviewb5;
-    
-    @FXML
-    private ImageView Imageviewb6;
-    
-    @FXML
-    private ImageView Imageviewb7;
-    
-    @FXML
-    private ImageView Imageviewb8;
-    
-    @FXML
-    private ImageView Imageviewb9;
-    
+   
     @FXML
     private Line Hline1;
     
@@ -123,6 +105,9 @@ public class FXMLDocumentController implements Initializable {
     @FXML
     private Label Counter2;
     
+    @FXML
+    private Button multiplayerbutton;
+    
     Alert oWon = new Alert(AlertType.CONFIRMATION);
     
         
@@ -140,13 +125,31 @@ public class FXMLDocumentController implements Initializable {
 
        buttons = new ArrayList<>(Arrays.asList(button00,button01,button02,button10,button11,button12,button20,button21,button22));
        lines = new ArrayList<>(Arrays.asList(Hline1,Hline2,Hline3,Dline1,Dline2,Vline1,Vline2,Vline3));
+      
+        SerialControl.detectPort();
+        SerialControl.disconnectArduino();
+        SerialControl.connectArduino(SerialControl.port);
+        
+    // creating timer task, timer
+        Timer t = new Timer();
+        TimerTask tt = new TimerTask() {
+            
+            @Override
+            public void run() {
+               
+               if(SerialControl.reading != null)
+                {
+                    setupButton(SerialControl.reading);
+                    SerialControl.reading = null;
+                }
+        
+            };
+        };
+        t.schedule(tt, new Date(),100);
+           
+          
+
        
-      // setupButton();
-       buttons.forEach(button ->
-       {
-            setupButton(button);
-            button.setFocusTraversable(false);
-       });
        
 //         EventHandler<ActionEvent> event1 = new
 //                          EventHandler<ActionEvent>() {
@@ -179,10 +182,18 @@ public class FXMLDocumentController implements Initializable {
 //            }
 //        };
        
-        WinnerText.setText(button00.getText());
+       // WinnerText.setText(button00.getText());
         
     }    
     
+    @FXML
+    private void HandleButton(ActionEvent event) 
+    {
+        
+        setupButton(SerialControl.reading);
+       
+        
+    }
     public void Draw(Button button,String turn)
     {
         Text text = new Text(turn);
@@ -234,13 +245,18 @@ public class FXMLDocumentController implements Initializable {
         button.setGraphic(O);
         //GameGrid.add(circle,(int)button.getLayoutY(),(int)button.getLayoutX());
     }*/
-     @FXML
-     private void setupButton(Button button) 
+     
+     public void setupButton(String x) 
      {  
-         int cell;
-         
-//        cell = controlGame('D');
-//         buttonAction(cell,1);
+           int cell;
+         if(SerialControl.reading != null)
+         {
+           cell = controlGame(x);
+           
+           //ButtonAction(cell,SerialControl.reading);
+         }
+
+// buttonAction(cell,1);
 //         cell = controlGame('D');
 //         buttonAction(cell,1);
 //         cell = controlGame('D');
@@ -248,11 +264,11 @@ public class FXMLDocumentController implements Initializable {
 //        cell = controlGame('R');
 //         buttonAction(cell,1);
         
-        button.setOnMouseClicked(mouseEvent -> {
-            setPlayerSymbol(button);
-            button.setDisable(true);
-            checkIfGameIsOver();
-        });
+//        button.setOnMouseClicked(mouseEvent -> {
+//            setPlayerSymbol(button);
+//            button.setDisable(true);
+//            checkIfGameIsOver();
+//        });
     }
      
      public void setPlayerSymbol(Button button){
@@ -407,19 +423,22 @@ public class FXMLDocumentController implements Initializable {
        }
         }
         
-       public int controlGame(char cellll ){
-           char input = cellll;
+       public int controlGame(String cellll ){
+           
+           String input = cellll;
            buttons.get(x).setStyle("-fx-background-color:#FFE40C");
-           if ( input  == 'U'){
+           
+           if ( "U".equals(input)){
                if (x == 0 || x== 1 || x ==2 ){
                    
                    x+= 6;
                }
                else {
                    x-= 3;
+                   System.out.println(input);
                }
            }
-            if ( input  == 'D'){
+            if ( "D".equals(input)){
                if (x == 7 || x== 8 || x ==9 ){
                    x = x - 6;
                }
@@ -427,7 +446,7 @@ public class FXMLDocumentController implements Initializable {
                    x = x + 3;
                }   
            }
-            if ( input  == 'R'){
+            if ( "R".equals(input)){
                if (x == 2 || x== 5 || x ==8 ){
                    x = x - 2;
                }
@@ -435,7 +454,7 @@ public class FXMLDocumentController implements Initializable {
                    x = x + 1;
                }   
            }
-          if ( input  == 'L'){
+          if ( "L".equals(input)){
                if (x == 0 || x== 3 || x ==6 ){
                    
                    x = x + 2;
@@ -445,18 +464,17 @@ public class FXMLDocumentController implements Initializable {
                    x = x - 1;
                }   
            }
-          
-           
-       
-     
+            x%=buttons.size();
             buttons.get(x).setStyle("-fx-background-color: #8a2be2");
             return x;
        }
        
-       public void buttonAction(int pos, int buttonAction){
+       public void ButtonAction(int pos, String buttonAction)
+       {
            
            
-           if (buttonAction ==1 ){
+           if ("F".equals(buttonAction) )
+           {
            setPlayerSymbol(buttons.get(pos));
            buttons.get(pos).setDisable(true);
            checkIfGameIsOver();
