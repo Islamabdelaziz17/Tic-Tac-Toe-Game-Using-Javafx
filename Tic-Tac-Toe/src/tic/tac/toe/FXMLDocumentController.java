@@ -116,7 +116,9 @@ public class FXMLDocumentController implements Initializable {
     Circle circle;*/
     
     int playerTurn = 0;
-    //int prevPos=4;
+    int player1counter = 0 ;
+    int player2counter = 0;
+
     int x  =4;
     
     @Override
@@ -145,7 +147,7 @@ public class FXMLDocumentController implements Initializable {
         
             };
         };
-        t.schedule(tt, new Date(),100);
+        t.schedule(tt, new Date(),1);
            
           
 
@@ -253,7 +255,7 @@ public class FXMLDocumentController implements Initializable {
          {
            cell = controlGame(x);
            
-           //ButtonAction(cell,SerialControl.reading);
+           ButtonAction(cell,SerialControl.reading);
          }
 
 // buttonAction(cell,1);
@@ -272,15 +274,24 @@ public class FXMLDocumentController implements Initializable {
     }
      
      public void setPlayerSymbol(Button button){
-        if(playerTurn % 2 == 0){
+        if(button.isDisabled())
+        {
+            System.out.println("Already Pressed");
+        }
+        else
+        {
+            if(playerTurn % 2 == 0){
             Draw(button,"X");
-            WinnerText.setText("Player 1 turn");
+            WinnerText.setText("Player 2 turn");
             playerTurn = 1;
         } else{
             Draw(button,"O");
-            WinnerText.setText("Player 2 turn");
+            WinnerText.setText("Player 1 turn");
             playerTurn = 0;
         }
+        }
+        
+        
     }
      
         public void fireAlert(char winner){
@@ -292,17 +303,29 @@ public class FXMLDocumentController implements Initializable {
                     // set content text
                 
                     oWon.setContentText("Press Ok to continue");
-
+                    
                     // show the dialog
 
                     Optional<ButtonType> result = oWon.showAndWait();
                     ButtonType dialogbutton = result.orElse(ButtonType.CANCEL);
 
-                    if (dialogbutton == ButtonType.OK) {
-                    WinnerText.setText("OKKKK");
+                    if (dialogbutton == ButtonType.OK) 
+                    {
+                       player1counter = 0;
+                        player2counter = 0;
+                        Counter1.setText(Integer.toString(player1counter));
+                        Counter2.setText(Integer.toString(player2counter));
+                        buttons.forEach(button ->
+                        {
+                            button.setGraphic(null);
+                            button.setDisable(false);
+                            button.setText(null);
+
+                        });
+                    
                     } 
                     else {
-                    WinnerText.setText("cancel");
+                        
                     }
                 }
                 else if (winner == 'X'){
@@ -319,20 +342,32 @@ public class FXMLDocumentController implements Initializable {
                     Optional<ButtonType> result = oWon.showAndWait();
                     ButtonType dialogbutton = result.orElse(ButtonType.CANCEL);
 
-                    if (dialogbutton == ButtonType.OK) {
-                    WinnerText.setText("OKKKK");
+                    if (dialogbutton == ButtonType.OK) 
+                    {
+                        player1counter = 0;
+                        player2counter = 0;
+                        Counter1.setText(Integer.toString(player1counter));
+                        Counter2.setText(Integer.toString(player2counter));
+                        buttons.forEach(button ->
+                        {
+                            button.setGraphic(null);
+                            button.setDisable(false);
+                            button.setText(null);
+                            System.out.println("xxxxxxxxxxxxx");
+                        });
                     } 
-                    else {
-                    WinnerText.setText("cancel");
+                    else 
+                    {
+                       
                     }
                 }
+               
         }
             
         
         public void checkIfGameIsOver()
         {
-            int player1counter = 0 ;
-            int player2counter = 0;
+            
             int a;
             for ( a = 0; a < 8; a++) {
             String line = null;
@@ -371,9 +406,9 @@ public class FXMLDocumentController implements Initializable {
             {
                 
                 WinnerText.setText("X won!");
-                
                 player1counter++;
                 Counter1.setText(Integer.toString(player1counter));
+                System.out.println(Integer.toString(player1counter));
                 lines.get(a).setVisible(true);
                 buttons.forEach(button ->
                 {
@@ -386,11 +421,12 @@ public class FXMLDocumentController implements Initializable {
                 
                 if(player1counter == 3)
                 {
-                    fireAlert('X');
                     buttons.forEach(button ->
                     {
                         button.setDisable(true);
                     });
+                    fireAlert('X');
+                
                 }
                 
              }
@@ -413,11 +449,12 @@ public class FXMLDocumentController implements Initializable {
                  lines.get(a).setVisible(false);
                 if(player2counter == 3)
                 {
-                    fireAlert('O');
                     buttons.forEach(button ->
                     {
                          button.setDisable(true);
                     });
+                    fireAlert('O');
+                   
                 }
             }
        }
@@ -472,17 +509,25 @@ public class FXMLDocumentController implements Initializable {
        public void ButtonAction(int pos, String buttonAction)
        {
            
-           
+           if(SerialControl.reading != null)
+           {
            if ("F".equals(buttonAction) )
            {
-           setPlayerSymbol(buttons.get(pos));
-           buttons.get(pos).setDisable(true);
-           checkIfGameIsOver();
+                    Thread t = new Thread(() -> {
+
+                     Platform.runLater(() -> {
+                         setPlayerSymbol(buttons.get(pos));
+                          buttons.get(pos).setDisable(true);
+                         checkIfGameIsOver();
+                     });
+                    });
+                    t.start();
+           }
+            SerialControl.reading = null;
+          
            }
        
-       
-       
-      // prevPos = pos;
+ 
        }
          
        
