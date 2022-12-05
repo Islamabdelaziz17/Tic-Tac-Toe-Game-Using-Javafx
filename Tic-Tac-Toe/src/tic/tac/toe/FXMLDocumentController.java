@@ -1,27 +1,21 @@
 
 package tic.tac.toe;
+
 import Arduino.SerialControl;
 import java.net.URL;
-import java.time.Duration;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Date;
 import java.util.Optional;
+import java.util.Random;
 import java.util.ResourceBundle;
 import java.util.Timer;
 import java.util.TimerTask;
-import java.util.logging.Level;
-import java.util.logging.Logger;
-import javafx.animation.Animation;
-import javafx.animation.KeyFrame;
-import javafx.animation.KeyValue;
-import javafx.animation.Timeline;
 import javafx.application.Platform;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Alert;
-import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.Button;
 import javafx.scene.control.ButtonType;
 import javafx.scene.control.Label;
@@ -29,19 +23,14 @@ import javafx.scene.paint.Color;
 import javafx.scene.shape.Line;
 import javafx.scene.text.Font;
 import javafx.scene.text.Text;
-import static javafx.util.Duration.seconds;
-
-import jssc.SerialPort;
-import jssc.SerialPortEvent;
-import jssc.SerialPortException;
-
 
 /**
+ * FXML Controller class
  *
  * @author islam
  */
 public class FXMLDocumentController implements Initializable {
-   
+
     @FXML
     private Button button00;
     
@@ -108,7 +97,9 @@ public class FXMLDocumentController implements Initializable {
     @FXML
     private Button multiplayerbutton;
     
-    Alert oWon = new Alert(AlertType.CONFIRMATION);
+    int checknine = 0;
+    
+    Alert oWon = new Alert(Alert.AlertType.CONFIRMATION);
     
         
     
@@ -118,7 +109,7 @@ public class FXMLDocumentController implements Initializable {
     int playerTurn = 0;
     int player1counter = 0 ;
     int player2counter = 0;
-
+    static public boolean playermode;
     int x  =4;
     
     @Override
@@ -138,61 +129,50 @@ public class FXMLDocumentController implements Initializable {
             
             @Override
             public void run() {
-               
-               if(SerialControl.reading != null)
+                if(playermode)
                 {
-                    setupButton(SerialControl.reading);
-                    SerialControl.reading = null;
+                   if (playerTurn % 2 != 0){
+
+                       Random random = new Random();
+                       int index = random.nextInt(buttons.size());
+                       while(buttons.get(index).isDisabled()){
+
+                            index = random.nextInt(buttons.size());
+                       }
+
+                       ButtonAction(index, "F");
+
+                   }
+                   else
+                   {
+                        if(SerialControl.reading != null)
+                         {
+                             setupButton(SerialControl.reading);
+                             SerialControl.reading = null;
+                         }
+
+                    }
                 }
-        
-            };
+                else
+                {
+                    if(SerialControl.reading != null)
+                    {
+                        setupButton(SerialControl.reading);
+                        SerialControl.reading = null;
+                    }
+                }
+            };    
         };
         t.schedule(tt, new Date(),1);
-           
-          
-
+    }
        
-       
-//         EventHandler<ActionEvent> event1 = new
-//                          EventHandler<ActionEvent>() {
-//            public void handle(ActionEvent e)
-//            {
-//                // set alert type
-//                xWon.setAlertType(AlertType.INFORMATION);
-// 
-//                // set content text
-//                xWon.setContentText("WINNER Dialog");
-// 
-//                // show the dialog
-//                xWon.show();
-//            }
-//        };
-         
-//          EventHandler<ActionEvent> event2 = new
-//                          EventHandler<ActionEvent>() {
-//            public void handle(ActionEvent e)
-//            {
-//                // set alert type
-//                oWon.setAlertType(AlertType.CONFIRMATION);
-//                oWon.
-// 
-//                // set content text
-//                oWon.setContentText("WINNER Dialog");
-// 
-//                // show the dialog
-//                oWon.show();
-//            }
-//        };
-       
-       // WinnerText.setText(button00.getText());
-        
-    }    
+    
     
     @FXML
     private void HandleButton(ActionEvent event) 
     {
         
-        setupButton(SerialControl.reading);
+        //SerialControl.disconnectArduino();
        
         
     }
@@ -206,47 +186,10 @@ public class FXMLDocumentController implements Initializable {
         button.setText(turn);
         button.setGraphic(text);
     }
-    /*public void DrawX()
-    {
-        line1 = new Line(50, 50, 100, 100);
-        line2 = new Line(20, 50, -35, 100);
-        
-        line1.setStroke(Color.rgb(165, 191, 214));
-        line1.setStrokeWidth(15);
-        
-        line2.setStroke(Color.rgb(165, 191, 214));
-        line2.setStrokeWidth(15);
-    }
-    
-    public void DrawX(Button button)
-    {
-        
-        GameGrid.add(new Pane(line1,line2),(int)button.getLayoutY(),(int)button.getLayoutX());
-        GameGrid.add(line2,(int)button.getLayoutY(),(int)button.getLayoutX());
-        GameGrid.setManaged(false);
-    }
-    
-    public void DrawO()
-    {
-       
-        /*circle = new Circle(0,0, 35);
-        circle.setFill(null);
-        circle.setStroke(Color.rgb(165, 191, 214));
-        circle.setStrokeWidth(15);
-    }
+   
+     
     
     
-    
-    public void DrawO(Button button)
-    {
-        O = new Text("O");
-        O.setFill(null);
-        O.setFont(new Font(70));
-        O.setStroke(Color.rgb(165, 191, 214));
-        O.setStrokeWidth(5);
-        button.setGraphic(O);
-        //GameGrid.add(circle,(int)button.getLayoutY(),(int)button.getLayoutX());
-    }*/
      
      public void setupButton(String x) 
      {  
@@ -258,22 +201,11 @@ public class FXMLDocumentController implements Initializable {
            ButtonAction(cell,SerialControl.reading);
          }
 
-// buttonAction(cell,1);
-//         cell = controlGame('D');
-//         buttonAction(cell,1);
-//         cell = controlGame('D');
-//        buttonAction(cell,0);
-//        cell = controlGame('R');
-//         buttonAction(cell,1);
-        
-//        button.setOnMouseClicked(mouseEvent -> {
-//            setPlayerSymbol(button);
-//            button.setDisable(true);
-//            checkIfGameIsOver();
-//        });
+
     }
      
      public void setPlayerSymbol(Button button){
+        
         if(button.isDisabled())
         {
             System.out.println("Already Pressed");
@@ -296,7 +228,7 @@ public class FXMLDocumentController implements Initializable {
      
         public void fireAlert(char winner){
                 if (winner == 'O'){
-                    oWon.setAlertType(AlertType.INFORMATION);
+                    oWon.setAlertType(Alert.AlertType.INFORMATION);
                     oWon.setTitle("Congrats");
                     
                     oWon.setHeaderText("O is the winner");
@@ -329,7 +261,7 @@ public class FXMLDocumentController implements Initializable {
                     }
                 }
                 else if (winner == 'X'){
-                    oWon.setAlertType(AlertType.INFORMATION);
+                    oWon.setAlertType(Alert.AlertType.INFORMATION);
                     oWon.setTitle("Congrats");
                     
                     oWon.setHeaderText("X is the winner");
@@ -428,7 +360,7 @@ public class FXMLDocumentController implements Initializable {
                     fireAlert('X');
                 
                 }
-                
+                checknine = 0;
              }
 
             //O winner
@@ -456,6 +388,18 @@ public class FXMLDocumentController implements Initializable {
                     fireAlert('O');
                    
                 }
+                checknine = 0;
+                
+            }
+            else if(checknine == 9)
+            {
+                buttons.forEach(button ->
+                {
+                    button.setGraphic(null);
+                    button.setDisable(false);
+                    button.setText(null);
+                });
+                checknine = 0;
             }
        }
         }
@@ -463,7 +407,7 @@ public class FXMLDocumentController implements Initializable {
        public int controlGame(String cellll ){
            
            String input = cellll;
-           buttons.get(x).setStyle("-fx-background-color:#FFE40C");
+           buttons.get(x).setStyle("-fx-border-color:#FFE40C;-fx-border-width:5px;");
            
            if ( "U".equals(input)){
                if (x == 0 || x== 1 || x ==2 ){
@@ -502,7 +446,7 @@ public class FXMLDocumentController implements Initializable {
                }   
            }
             x%=buttons.size();
-            buttons.get(x).setStyle("-fx-background-color: #8a2be2");
+            buttons.get(x).setStyle("-fx-border-color:#8a2be2;-fx-border-width:10px;");
             return x;
        }
        
@@ -511,14 +455,15 @@ public class FXMLDocumentController implements Initializable {
            
            if(SerialControl.reading != null)
            {
-           if ("F".equals(buttonAction) )
+           if ("F".equals(buttonAction) ||  "u".equals(buttonAction))
            {
                     Thread t = new Thread(() -> {
 
                      Platform.runLater(() -> {
                          setPlayerSymbol(buttons.get(pos));
                           buttons.get(pos).setDisable(true);
-                         checkIfGameIsOver();
+                          checknine++;
+                          checkIfGameIsOver();
                      });
                     });
                     t.start();
@@ -529,22 +474,15 @@ public class FXMLDocumentController implements Initializable {
        
  
        }
-         
+ 
        
-       
+       public void getRandomElements() {
+        
+        Random random = new Random();
+        int index = random.nextInt(buttons.size());
+
+        buttons.get(index).setText("O");
+        buttons.get(index).setDisable(true);
+        buttons.remove(buttons.get(index));
+    }
 }
-
-
-
-
-
-
-
-     
-
-
-
-
-
-
-

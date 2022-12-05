@@ -108,20 +108,12 @@
                         <Font name="Lucida Sans Typewriter Bold" size="26.0" />
                      </font>
                   </Label>
-                  <Rectangle arcHeight="5.0" arcWidth="5.0" fill="BLUEVIOLET" height="157.0" stroke="#ffe40c" strokeType="INSIDE" strokeWidth="25.0" width="511.0" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="2" />
-                  <Label id="WinnerText" fx:id="WinnerText" alignment="CENTER" contentDisplay="CENTER" minWidth="-Infinity" prefHeight="59.0" prefWidth="316.0" text="X Won !" textAlignment="CENTER" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="2" GridPane.valignment="CENTER">
+                  <Rectangle arcHeight="5.0" arcWidth="5.0" fill="BLUEVIOLET" height="157.0" stroke="#ffe40c" strokeType="INSIDE" strokeWidth="15.0" width="511.0" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="2" />
+                  <Label id="WinnerText" fx:id="WinnerText" alignment="CENTER" contentDisplay="CENTER" minWidth="-Infinity" prefHeight="59.0" prefWidth="316.0" textAlignment="CENTER" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="2" GridPane.valignment="CENTER">
                      <font>
                         <Font name="Lucida Sans Typewriter Bold" size="50.0" />
                      </font>
                   </Label>
-                  <Button id="multiplayer" fx:id="multiplayerbutton" mnemonicParsing="false" onAction="#HandleButton" text="MultiPlayer" textAlignment="CENTER" GridPane.rowIndex="1">
-                     <GridPane.margin>
-                        <Insets left="100.0" top="150.0" />
-                     </GridPane.margin>
-                     <font>
-                        <Font name="System Bold" size="15.0" />
-                     </font>
-                  </Button>
                </children>
             </GridPane>
          </right>

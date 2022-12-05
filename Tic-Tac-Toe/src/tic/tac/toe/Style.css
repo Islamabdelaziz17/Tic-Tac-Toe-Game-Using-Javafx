@@ -7,9 +7,10 @@
     -fx-background-color:#FFE40C;
     -fx-text-fill: transparent;
 }
-/*
-.GameGrid:hover{
+
+.StartMenuButtons:hover{
     
-    -fx-background-color: #8a2be2;
+    -fx-border-width: 5px;
+    -fx-border-color: #8a2be2;
     
-}*/
+}

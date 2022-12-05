@@ -8,7 +8,7 @@
   </information>
   <resources>
     <j2se version="1.6+" href="http://java.sun.com/products/autodl/j2se"/>
-    <jar href="Tic-Tac-Toe.jar" size="72098" download="eager" />
+    <jar href="Tic-Tac-Toe.jar" size="80357" download="eager" />
     <jar href="lib\jssc.jar" size="152418" download="eager" />
   </resources>
   <jfx:javafx-desc  width="800" height="600" main-class="tic.tac.toe.TicTacToeMain"  name="Tic-Tac-Toe" />
