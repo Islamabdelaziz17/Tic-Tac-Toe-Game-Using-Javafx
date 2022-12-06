@@ -351,7 +351,7 @@ public class FXMLDocumentController implements Initializable {
                 });
                 lines.get(a).setVisible(false);
                 
-                if(player1counter == 3)
+                if(player1counter == 1)
                 {
                     buttons.forEach(button ->
                     {
@@ -359,6 +359,16 @@ public class FXMLDocumentController implements Initializable {
                     });
                     fireAlert('X');
                 
+                }
+                else if(checknine == 9)
+                {
+                    buttons.forEach(button ->
+                    {
+                        button.setGraphic(null);
+                        button.setDisable(false);
+                        button.setText(null);
+                    });
+                    checknine = 0;
                 }
                 checknine = 0;
              }
@@ -379,7 +389,7 @@ public class FXMLDocumentController implements Initializable {
                     button.setText(null);
                 });
                  lines.get(a).setVisible(false);
-                if(player2counter == 3)
+                if(player2counter == 1)
                 {
                     buttons.forEach(button ->
                     {
