@@ -6,7 +6,7 @@ Follow the link for the [Demonstrative video](https://youtu.be/4tB1NDlyix0)
 
 ![x](https://user-images.githubusercontent.com/71322040/206015901-6825ec30-d411-4921-8f0a-c94904cc65a9.jpg)
 ------------------------------------
-#Authors
+# Authors
 * Abdollah Mahmoud
 * Ahmad Noaman
 * Islam Abd El-Aziz Lashin
@@ -14,7 +14,7 @@ Follow the link for the [Demonstrative video](https://youtu.be/4tB1NDlyix0)
 * Samira Fayez
 * Samuel Medhat 
 ------------------------------------
-#How To Use:
+# How To Use:
 
 1. Download this Repository to your local machine.
 2. Connect the hardware
@@ -25,12 +25,12 @@ Follow the link for the [Demonstrative video](https://youtu.be/4tB1NDlyix0)
 ![6](https://user-images.githubusercontent.com/71322040/206017186-6dde3080-cc7a-4fa6-a399-e73eed2c58d5.jpg) 
 ![c](https://user-images.githubusercontent.com/71322040/206017258-173b8f41-df6e-46f2-96ac-46e39050d9ed.jpg)
 ------------------------------------
-#Dependencies and packages:
+# Dependencies and packages:
 
 1. JSSC-2.6.0-Release
 2. jSerialComm.SerialPort
 ------------------------------------
-#Brief About the Files:
+# Brief About the Files:
 1. **FXMLDocumentController.java:**
 * Sends and receives data from the Arduino to the Java GUI.
 * Handles the turns between players and computer.
